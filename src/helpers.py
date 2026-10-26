@@ -8,3 +8,12 @@ def scale_down_image(image, max_dim=1024):
         return image.resize((int(img_w * ratio), int(img_h * ratio)))
     return image
 
+def validate_audio_length(audio_bytes, min_seconds=2.0):
+    """Ensures recorded voice sample is long enough"""
+    import io, librosa
+    try:
+        audio, sr = librosa.load(io.BytesIO(audio_bytes), sr=16000)
+        return (len(audio) / sr) >= min_seconds
+    except:
+        return False
+
