@@ -22,3 +22,9 @@ def hash_password(raw_password):
     import hashlib
     return hashlib.sha256(raw_password.encode('utf-8')).hexdigest()
 
+def generate_attendance_csv(df):
+    """Converts attendance DataFrame to downloadable CSV format"""
+    if df.empty:
+        return None
+    return df.to_csv(index=False).encode('utf-8')
+
