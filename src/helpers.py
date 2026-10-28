@@ -28,3 +28,10 @@ def generate_attendance_csv(df):
         return None
     return df.to_csv(index=False).encode('utf-8')
 
+def init_app_state(st_session):
+    """Initializes required Streamlit session variables"""
+    defaults = {'is_logged_in': False, 'user_role': None, 'attendance_images': []}
+    for key, val in defaults.items():
+        if key not in st_session:
+            st_session[key] = val
+
