@@ -14,3 +14,7 @@ def format_supabase_timestamp(ts):
     except:
         return 'Invalid Date'
 
+def is_valid_match(score, threshold=0.65):
+    """Validates if the facial/voice match meets the confidence threshold"""
+    return score >= threshold
+
