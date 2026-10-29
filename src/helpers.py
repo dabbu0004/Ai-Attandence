@@ -18,3 +18,8 @@ def validate_audio_length(audio_bytes, min_seconds=2.0):
     except Exception:
         return False
 
+def hash_password(raw_password):
+    """Hashes teacher passwords for secure Supabase storage"""
+    import hashlib
+    return hashlib.sha256(raw_password.encode('utf-8')).hexdigest()
+
