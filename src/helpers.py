@@ -18,3 +18,11 @@ def is_valid_match(score, threshold=0.65):
     """Validates if the facial/voice match meets the confidence threshold"""
     return score >= threshold
 
+def normalize_embedding(embedding):
+    """Normalizes a 128-d face embedding vector"""
+    import numpy as np
+    norm = np.linalg.norm(embedding)
+    if norm == 0:
+        return embedding
+    return embedding / norm
+
