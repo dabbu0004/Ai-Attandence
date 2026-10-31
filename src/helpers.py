@@ -42,3 +42,8 @@ def handle_db_response(response):
         return None
     return response.data if hasattr(response, 'data') else response
 
+def calculate_euclidean_distance(emb1, emb2):
+    """Calculates distance between two face embeddings"""
+    import numpy as np
+    return np.linalg.norm(np.array(emb1) - np.array(emb2))
+
