@@ -47,3 +47,8 @@ def calculate_euclidean_distance(emb1, emb2):
     import numpy as np
     return np.linalg.norm(np.array(emb1) - np.array(emb2))
 
+def apply_noise_gate(audio_signal, threshold=0.01):
+    """Zeroes out audio samples below noise threshold"""
+    import numpy as np
+    return np.where(np.abs(audio_signal) < threshold, 0, audio_signal)
+
