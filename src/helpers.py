@@ -52,3 +52,9 @@ def apply_noise_gate(audio_signal, threshold=0.01):
     import numpy as np
     return np.where(np.abs(audio_signal) < threshold, 0, audio_signal)
 
+def ensure_rgb_format(image):
+    """Ensures image is in RGB format for dlib processing"""
+    if image.mode != 'RGB':
+        return image.convert('RGB')
+    return image
+
