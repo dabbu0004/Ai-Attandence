@@ -58,3 +58,11 @@ def ensure_rgb_format(image):
         return image.convert('RGB')
     return image
 
+def get_current_academic_term():
+    """Returns Fall, Spring, or Summer based on current date"""
+    from datetime import datetime
+    month = datetime.now().month
+    if 8 <= month <= 12: return 'Fall'
+    elif 1 <= month <= 5: return 'Spring'
+    return 'Summer'
+
