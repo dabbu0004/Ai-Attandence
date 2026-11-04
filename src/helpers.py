@@ -26,3 +26,7 @@ def normalize_embedding(embedding):
         return embedding
     return embedding / norm
 
+def generate_mock_student_data():
+    """Used for UI testing before DB connection"""
+    return [{'id': 1, 'status': 'present'}, {'id': 2, 'status': 'absent'}]
+
