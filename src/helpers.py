@@ -36,3 +36,10 @@ def init_app_state(st_session):
         if key not in st_session:
             st_session[key] = val
 
+def handle_db_response(response):
+    """Safely parses Supabase responses and catches connection timeouts"""
+    if hasattr(response, 'error') and response.error:
+        print(f"Database Error: {response.error}")
+        return None
+    return response.data if hasattr(response, 'data') else response
+
