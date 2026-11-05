@@ -1,0 +1,36 @@
+# --- Secrets (config.py reads SUPABASE_URL / SUPABASE_KEY from st.secrets) ---
+.streamlit/secrets.toml
+.env
+.env.*
+*.pem
+*.key
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# --- Virtual environments ---
+venv/
+.venv/
+env/
+
+# --- Editors and OS files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Tool caches and test output ---
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Local test recordings (voice attendance experiments) ---
+*.wav
+*.mp3
