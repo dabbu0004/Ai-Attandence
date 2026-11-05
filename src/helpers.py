@@ -66,3 +66,8 @@ def get_current_academic_term():
     elif 1 <= month <= 5: return 'Spring'
     return 'Summer'
 
+def is_valid_student_id(student_id):
+    """Validates student ID against university format"""
+    import re
+    return bool(re.match(r'^STU-\d{4}-\d{3}$', str(student_id)))
+
