@@ -34,3 +34,5 @@ htmlcov/
 # --- Local test recordings (voice attendance experiments) ---
 *.wav
 *.mp3
+venv/
+__pycache__/
