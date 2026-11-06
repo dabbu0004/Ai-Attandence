@@ -9,7 +9,7 @@ def header_home():
             <img src='{logo_url}' alt='SnapClass logo' />
             <div>
                 <p class="snap-kicker">AI-powered attendance</p>
-                <h1>SNAP<span>CLASS</span></h1>
+                <h1>AI<span>ATTENDANCE</span></h1>
                 <p class="snap-tagline">Attendance, made effortless.</p>
             </div>
         </div>   
@@ -22,10 +22,10 @@ def header_dashboard():
     
     st.markdown(f"""
         <div class="snap-dashboard-header">
-            <img src='{logo_url}' alt='SnapClass logo' />
+            <img src='{logo_url}' alt='Ai-Attendance logo' />
             <div>
                 <p class="snap-kicker">AI attendance platform</p>
-                <h2>SNAP<span>CLASS</span></h2>
+                <h2>AI<span>ATTENDANCE</span></h2>
             </div>
         </div>   
     """, unsafe_allow_html=True)

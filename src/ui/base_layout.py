@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def style_background_home():
     st.markdown("""
         <style>
@@ -131,6 +130,14 @@ def style_base_layout():
                 margin: 0;
             }
 
+            .auth-hero {
+                background: linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(240, 253, 250, .88));
+                border: 1px solid #dbe5ed;
+                border-radius: 1.25rem;
+                box-shadow: 0 12px 30px rgba(15, 23, 42, .06);
+                padding: 1.5rem 1.75rem;
+            }
+
             .snap-eyebrow, .snap-card-label {
                 color: #0f766e;
                 font-size: .72rem;
@@ -149,7 +156,7 @@ def style_base_layout():
             }
 
             .dashboard-welcome {
-                color: #0f172a;
+                color: #5683e9 !important;
                 font-family: 'Space Grotesk', sans-serif;
                 margin: 0 !important;
             }
@@ -378,13 +385,59 @@ def style_base_layout():
                 background: #115e59 !important;
             }
 
-            input, textarea, [data-baseweb="select"] > div {
-                border-radius: .65rem !important;
-                border-color: #cbd5e1 !important;
-                background: #fff !important;
+            [data-testid="stTextInput"],
+            [data-testid="stTextArea"],
+            [data-testid="stNumberInput"],
+            [data-testid="stSelectbox"],
+            [data-testid="stDateInput"],
+            [data-testid="stFileUploader"],
+            [data-testid="stCameraInput"],
+            [data-testid="stAudioInput"] {
+                margin-bottom: .85rem;
             }
 
-            input:focus, textarea:focus {
+            [data-testid="stTextInput"] label,
+            [data-testid="stTextArea"] label,
+            [data-testid="stNumberInput"] label,
+            [data-testid="stSelectbox"] label,
+            [data-testid="stDateInput"] label,
+            [data-testid="stFileUploader"] label,
+            [data-testid="stCameraInput"] label,
+            [data-testid="stAudioInput"] label {
+                color: #334155 !important;
+                font-weight: 600 !important;
+            }
+
+            div[data-baseweb="input"], div[data-baseweb="base-input"] {
+                background-color: #fff !important;
+                border-radius: .65rem !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+
+            input, textarea, [data-baseweb="select"] input {
+                color: #0f172a !important;
+                -webkit-text-fill-color: #0f172a !important;
+               background-color: #ffffff !important;
+            }
+
+            input::placeholder, textarea::placeholder {
+                color: #64748b !important;
+                -webkit-text-fill-color: #64748b !important;
+            }
+
+            [data-testid="stFileUploaderDropzone"] {
+            border-radius: .65rem !important;
+            border-color: #cbd5e1 !important;
+            background: #fff !important;
+            color: #0f172a !important;
+            }
+
+            [data-testid="stFileUploaderDropzone"] small,
+            [data-testid="stFileUploaderDropzone"] span {
+                color: #475569 !important;
+            }
+
+            input:focus, textarea:focus, [data-baseweb="select"] > div:focus-within {
                 border-color: #14b8a6 !important;
                 box-shadow: 0 0 0 3px rgba(20, 184, 166, .14) !important;
             }
@@ -423,10 +476,11 @@ def style_base_layout():
                     transition-duration: .01ms !important;
                 }
 
-                @media (max-width: 700px) {
-                    .dashboard-metrics {
-                        grid-template-columns: 1fr;
-                    }
+            }
+
+            @media (max-width: 700px) {
+                .dashboard-metrics {
+                    grid-template-columns: 1fr;
                 }
             }
         </style>

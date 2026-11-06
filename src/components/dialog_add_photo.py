@@ -8,7 +8,7 @@ import time
 @st.dialog("Capture or upload photos")
 def add_photos_dialog():
     st.markdown('<p class="snap-eyebrow">ATTENDANCE CAPTURE</p>', unsafe_allow_html=True)
-    st.write('Add classroom photos and let SnapClass identify enrolled students.')
+    st.write('Add classroom photos and let Ai-Attendance identify enrolled students.')
 
     if 'photo_tab' not in st.session_state:
         st.session_state.photo_tab = 'camera'

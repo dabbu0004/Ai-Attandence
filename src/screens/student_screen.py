@@ -27,7 +27,6 @@ def student_dashboard():
             del st.session_state.student_data 
             st.rerun()
 
-
     st.space()
 
     c1, c2 =st.columns(2)
@@ -37,9 +36,7 @@ def student_dashboard():
         if st.button('Enroll in a subject', type='primary', width='stretch', icon=':material/add:'):
             enroll_dialog()
 
-
     st.divider()
-
 
     with st.spinner('Loading your enrolled subjects..'):
         subjects = get_student_subjects(student_id)
@@ -81,16 +78,14 @@ def student_dashboard():
         sub = sub_node['subjects']
         sid = sub['subject_id']
 
-
         stats = stats_map.get(sid,{"total":0, "attended": 0} )
         def unenroll_button():
                 if st.button("Leave subject", type='tertiary', width='stretch', icon=':material/delete_forever:'):
                     unenroll_student_to_subject(student_id, sid)
-                    st.toast(f'Unenrolled from {sub['name']} successfully!')
+                    st.toast(f"Unenrolled from {sub['name']} successfully!")
                     st.rerun()
 
         with cols[i % 2]:
-
             subject_card(
                 name = sub['name'],
                 code =sub['subject_code'],
@@ -103,13 +98,9 @@ def student_dashboard():
             )
     footer_dashboard()
 
-
 def student_screen():
-
-
     style_background_dashboard()
     style_base_layout()
-
 
     if "student_data" in st.session_state:
         student_dashboard()
@@ -127,40 +118,47 @@ def student_screen():
         <div class="auth-hero">
             <p class="snap-eyebrow">STUDENT ACCESS</p>
             <h2>Pick up where you left off.</h2>
-            <p>Position your face in the frame and let SnapClass verify you securely.</p>
+            <p>Position your face in the frame and let Ai-Attendance verify you securely.</p>
         </div>
     """, unsafe_allow_html=True)
     
-    show_registration = False
     photo_source = st.camera_input("Position your face in the center")
 
     if photo_source:
-        img = np.array(Image.open(photo_source))
+        if "last_photo" not in st.session_state or st.session_state.last_photo != photo_source.getvalue():
+            st.session_state.last_photo = photo_source.getvalue()
+            img = np.array(Image.open(photo_source))
+            
+            with st.spinner('AI is scanning..'):
+                detected, all_ids, num_faces = predict_attendance(img)
+                st.session_state.scan_results = (detected, num_faces)
+        
+        detected, num_faces = st.session_state.scan_results
 
-        with st.spinner('AI is scanning..'):
-            detected, all_ids, num_faces = predict_attendance(img)
+        if num_faces == 0:
+            st.warning('Face not found!')
+            st.session_state.show_registration = False
+        elif num_faces > 1:
+            st.warning('Multiple faces found')
+            st.session_state.show_registration = False
+        else:
+            if detected:
+                student_id = list(detected.keys())[0]
+                all_students = get_all_students()
+                student = next((s for s in all_students if s['student_id']==student_id), None)
 
-            if num_faces == 0:
-                st.warning('Face not found!')
-            elif num_faces >1:
-                st.warning('Multiple faces found')
+                if student:
+                    st.session_state.is_logged_in = True
+                    st.session_state.user_role = 'student'
+                    st.session_state.student_data = student
+                    st.toast(f"Welcome Back {student['name']}")
+                    time.sleep(1)
+                    st.rerun()
             else:
-                if detected:
-                    student_id = list(detected.keys())[0]
-                    all_students = get_all_students()
-                    student = next((s for s in all_students if s['student_id']==student_id), None)
+                st.info('Face not recognized! You might be a new student!')
+                st.session_state.show_registration = True
 
-                    if student:
-                        st.session_state.is_logged_in = True
-                        st.session_state.user_role = 'student'
-                        st.session_state.student_data = student
-                        st.toast(f'Welcome Back {student['name']}')
-                        time.sleep(1)
-                        st.rerun()
-                else:
-                    st.info('Face not recognized! You might be a new student!')
-                    show_registration = True
-    if show_registration:
+    if st.session_state.get('show_registration', False):
         with st.container(border=True):
             st.markdown('<p class="snap-eyebrow">NEW PROFILE</p>', unsafe_allow_html=True)
             st.header('Create your student profile')
@@ -168,7 +166,6 @@ def student_screen():
 
             st.subheader('Optional voice enrollment')
             st.info("Add a short voice sample to enable voice-only attendance later.")
-
 
             audio_data = None
 
@@ -205,6 +202,4 @@ def student_screen():
                 else:
                     st.warning('Please enter your name!')
 
-
-        
     footer_dashboard()

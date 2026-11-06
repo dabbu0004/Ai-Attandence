@@ -1,5 +1,5 @@
 # --- Secrets (config.py reads SUPABASE_URL / SUPABASE_KEY from st.secrets) ---
-.streamlit/secrets.toml
+streamlit/secrets.toml
 .env
 .env.*
 *.pem
@@ -14,7 +14,7 @@ dist/
 
 # --- Virtual environments ---
 venv/
-.venv/
+# .venv/
 env/
 
 # --- Editors and OS files ---

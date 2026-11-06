@@ -9,7 +9,7 @@ def home_screen():
 
     st.markdown("""
         <div class="snap-home-intro">
-            <p class="snap-eyebrow">WELCOME TO SNAPCLASS</p>
+            <p class="snap-eyebrow">WELCOME TO AI-ATTENDANCE</p>
             <h2>Attendance that works<br><span>as hard as you do.</span></h2>
             <p>Join your classroom or manage every session from one focused workspace.</p>
         </div>
