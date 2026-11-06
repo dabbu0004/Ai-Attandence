@@ -75,3 +75,7 @@ def generate_metric_html(label, value):
     """Generates raw HTML for custom metric cards"""
     return f"<div class='metric-card'><strong>{value}</strong><span>{label}</span></div>"
 
+def rect_to_tuple(rect):
+    """Converts dlib rectangle to (x, y, w, h) tuple"""
+    return (rect.left(), rect.top(), rect.right() - rect.left(), rect.bottom() - rect.top())
+
