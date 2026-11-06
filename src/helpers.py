@@ -71,3 +71,7 @@ def is_valid_student_id(student_id):
     import re
     return bool(re.match(r'^STU-\d{4}-\d{3}$', str(student_id)))
 
+def generate_metric_html(label, value):
+    """Generates raw HTML for custom metric cards"""
+    return f"<div class='metric-card'><strong>{value}</strong><span>{label}</span></div>"
+
