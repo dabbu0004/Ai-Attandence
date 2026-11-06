@@ -346,9 +346,10 @@ def style_base_layout():
                 font-size: .76rem;
             }
 
-            h3, h4, p, label, input, textarea, button, [data-testid="stMarkdownContainer"] {
-                font-family: 'DM Sans', sans-serif;
-            }
+        h3, h4, p, label, [data-testid="stMarkdownContainer"] {
+    font-family: 'DM Sans', sans-serif;
+    color: #0f172a !important;
+}
 
             button {
                 border-radius: .7rem !important;
