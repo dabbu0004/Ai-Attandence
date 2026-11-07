@@ -79,3 +79,13 @@ def rect_to_tuple(rect):
     """Converts dlib rectangle to (x, y, w, h) tuple"""
     return (rect.left(), rect.top(), rect.right() - rect.left(), rect.bottom() - rect.top())
 
+def execute_with_retry(query_func, max_retries=3):
+    """Executes a database query with exponential backoff"""
+    import time
+    for i in range(max_retries):
+        try:
+            return query_func()
+        except Exception:
+            time.sleep(2 ** i)
+    return None
+
