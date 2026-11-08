@@ -89,3 +89,8 @@ def execute_with_retry(query_func, max_retries=3):
             time.sleep(2 ** i)
     return None
 
+def format_class_duration(minutes):
+    """Formats minutes into human-readable hours and minutes"""
+    if minutes < 60: return f"{minutes}m"
+    return f"{minutes // 60}h {minutes % 60}m"
+
